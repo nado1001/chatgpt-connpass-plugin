@@ -1,7 +1,17 @@
 {
   "schema_version": "v1",
-  "name_for_human": "connpass plugin",
-  "name_for_model": "connpass plugin",
-  "description_for_human": "connpass plugin",
-  "description_for_model": "connpass plugin"
+  "name_for_human": "Connpass Plugin",
+  "name_for_model": "connpass_plugin",
+  "description_for_human": "Get the event information you want from connpass.",
+  "description_for_model": "Plugin to retrieve information on relevant events from connpass based on user statements.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:8000/openapi.yaml"
+  },
+  "logo_url": "http://localhost:8000/logo.png",
+  "contact_email": "tk.tech1001@gmail.com",
+  "legal_info_url": "http://example.com/legal"
 }
