@@ -1,0 +1,180 @@
+openapi: 3.0.1
+info:
+  title: connpass Plugin
+  description: Plugin to get the event information you want from connpass using ChatGPT.
+  version: 'v1'
+servers:
+  - url: http://localhost:8000
+paths:
+  /events:
+    get:
+      operationId: getEvents
+      summary: Retrieve events based on provided parameters
+      parameters:
+      - name: event_id
+        in: query
+        description: Event ID
+        required: false
+        schema:
+          type: integer
+      - name: keyword
+        in: query
+        description: Keyword to search for
+        required: false
+        schema:
+          type: string
+      - name: keyword_or
+        in: query
+        description: Keyword to search for (OR)
+        required: false
+        schema:
+          type: string
+      - name: ym
+        in: query
+        description: Year and month for search
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: ymd
+        in: query
+        description: Date for search
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: nickname
+        in: query
+        description: Organizer's nickname
+        required: false
+        schema:
+          type: string
+      - name: series_id
+        in: query
+        description: Series ID
+        required: false
+        schema:
+          type: integer
+      - name: start
+        in: query
+        description: Position to start getting records from
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Order of records
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of records to return
+        required: false
+        schema:
+          type: integer
+      - name: format
+        in: query
+        description: Response format
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getEventsResponse'
+
+components:
+  schemas:
+    getEventsResponse:
+      type: object
+      properties:
+        results_start:
+          type: integer
+          description: The number of the first event returned
+        results_returned:
+          type: integer
+          description: The number of events returned
+        results_available:
+          type: integer
+          description: The number of events found
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              event_id:
+                type: integer
+                description: Event ID
+              title:
+                type: string
+                description: Event title
+              catch:
+                type: string
+                description: Event catch
+              description:
+                type: string
+                description: Event description
+              event_url:
+                type: string
+                description: Event URL
+              started_at:
+                type: string
+                description: Event start date and time
+              ended_at:
+                type: string
+                description: Event end date and time
+              limit:
+                type: integer
+                description: Event capacity
+              hash_tag:
+                type: string
+                description: Event hashtag
+              event_type:
+                type: string
+                description: Event type
+              accepted:
+                type: integer
+                description: Number of participants
+              waiting:
+                type: integer
+                description: Number of waiting participants
+              updated_at:
+                type: string
+                description: Event update date and time
+              owner_id:
+                type: integer
+                description: Organizer ID
+              owner_nickname:
+                type: string
+                description: Organizer nickname
+              owner_display_name:
+                type: string
+                description: Organizer display name
+              place:
+                type: string
+                description: Event venue
+              address:
+                type: string
+                description: Event venue address
+              lat:
+                type: string
+                description: Event venue latitude
+              lon:
+                type: string
+                description: Event venue longitude
+              series:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Series ID
+                  title:
+                    type: string
+                    description: Series title
+                  url:
+                    type: string
+                    description: Series URL
